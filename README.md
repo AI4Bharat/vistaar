@@ -1,1 +1,1 @@
-# Vistaar: Benchmarks and Training sets for Indian Language ASR
+# Vistaar: Diverse Benchmarks and Training sets for Indian Language ASR
