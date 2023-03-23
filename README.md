@@ -28,5 +28,42 @@ Word error rates (%) of IndicWhisper on the Vistaar Benchmark. Values in bold in
 | IndicWhisper  | **10.3** | **12.0**      | **11.4** | **15.0**    | **7.6**  | 12           | **26.8**  | **13.6**  |
 
  Comparison of publicly-available models on the Hindi subset of the Vistaar benchmark
+ 
+## Updates
+
+## Table of contents
+- [IndicWav2Vec](#indicwav2vec)
+  - [Benchmarks](#benchmarks)
+  - [Updates](#updates)
+  - [Table of contents](#table-of-contents)
+  - [Resources](#resources)
+    - [Download Models](#download-models)
+    - [Hosted API Usage](#hosted-api-usage)
+    - [Accessing on ULCA](#accessing-on-ulca)
+  - [Quick start](#quick-start)
+    - [Python Inference](#python-inference)
+    - [Huggingface Inference](#huggingface-inference)
+  - [Tutorials](#tutorials)
+    - [Setting up your environment](#setting-up-your-environment)
+    - [Pretraining](#pretraining)
+      - [Data preparation](#data-preparation)
+      - [Manifest Creation](#manifest-creation)
+    - [Training procedure and code](#training-procedure-and-code)
+    - [Finetuning](#finetuning)
+      - [Data preparation](#data-preparation-1)
+      - [Finetuning procedure and code](#finetuning-procedure-and-code)
+      - [Finetuning procedure and code](#finetuning-procedure-and-code-1)
+    - [Language Modelling (LM)](#language-modelling-lm)
+      - [Data preparation](#data-preparation-2)
+      - [Training details](#training-details)
+    - [Evaluating ASR models](#evaluating-asr-models)
+    - [Model exporting](#model-exporting)
+    - [Deployment](#deployment)
+  - [Cite](#cite)
+  - [License](#license)
+  - [Contributors](#contributors)
+  - [Contact](#contact)
+
+
 
 
