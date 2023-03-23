@@ -1,1 +1,18 @@
 # Vistaar: Diverse Benchmarks and Training sets for Indian Language ASR
+
+ Vistaar is a set of 59 benchmarks and training datasets across various language and domain combinations such as news, education, literature, tourism etc. The training datasets are avaialable for 12 Indian languages amounting to over 10,700 hours of labelled audio data. We also train IndicWhisper models by fine-tuning the Whisper models on the Vistaar train dataset and observe that it has the lowest WER on 39 out of 59 Vistaar benchmarks.
+ 
+## Benchmarks
+Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, CommonVoice, IndicTTS, MUCS, GramVaani across 12 languages. We evaluate IndicWhisper on these benchmarks along with 3 publicly avaialable ASR systems and 2 commercially avaialable systems. Below mentioned are the results
+
+| Datasets      | bn            | gu            | hi            | kn            | ml            | mr            | or            | pa            | sa   | ta            | te            | ur            | avg  |
+|---------------|---------------|---------------|---------------|---------------|---------------|---------------|---------------|---------------|------|---------------|---------------|---------------|------|
+| Kathbath      | 16.6          | 17.8          | \textbf{10.3} | \textbf{19.3} | \textbf{34.8} | \textbf{19.9} | 24.7          | 16.9          | 45.6 | \textbf{24.2} | 25.0          | \textbf{11.9} | 22.3 |
+| Kathbath Hard | 19.4          | \textbf{20.6} | \textbf{12.0} | \textbf{22.2} | \textbf{38.4} | \textbf{22.1} | 29.1          | 19.7          | 50.5 | \textbf{27.5} | 27.8          | \textbf{14.7} | 25.3 |
+| CommonVoice   | 24.7          | -             | \textbf{11.4} | -             | \textbf{44.5} | 22.8          | \textbf{35.2} | 22.4          | -    | \textbf{29.2} | -             | 31.7          | 27.8 |
+| FLEURS        | \textbf{20.9} | 23.5          | \textbf{15.0} | \textbf{18.6} | \textbf{22.6} | \textbf{20.5} | \textbf{32.9} | \textbf{23.1} | -    | \textbf{25.2} | \textbf{25.4} | \textbf{19.2} | 22.5 |
+| IndicTTS      | \textbf{18.8} | \textbf{19.1} | \textbf{7.6}  | \textbf{13.2} | \textbf{21.4} | \textbf{11.4} | \textbf{15.0} | -             | -    | \textbf{17.2} | 33.8          | -             | 17.5 |
+| MUCS          | -             | 33.2          | \textbf{12.0} | -             | -             | \textbf{12.8} | \textbf{27.5} | -             | -    | 28.3          | 32.1          | -             | 24.3 |
+| Gramvaani     | -             | -             | \textbf{26.8} | -             | -             | -             | -             | -             | -    | -             | -             | -             | 26.8 |
+| Average       | 20.1          | 22.8          | 13.6          | 18.3          | 32.3          | 18.2          | 27.4          | 20.5          | 48.0 | 25.3          | 28.8          | 19.4          | 24.6 |
+
