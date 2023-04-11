@@ -146,7 +146,10 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 ### Inference using IndicWhisper
   - Sample structure of manifest file
   ```
-  {"audio_filepath":<path to audio file>}
+  {"audio_filepath":<path to audio file 1>}
+  {"audio_filepath":<path to audio file 2>}
+  .
+  .
   ```
   - running inference
   ```
@@ -158,6 +161,47 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   ```
 ### Training on Vistaar train datasets
   - Manifest Creation
-  Follow the same steps as in [Evaluating ASR models](#evaluating-asr-models) for the vistaar training datasets
+    -Follow the same steps as in [Evaluating ASR models](#evaluating-asr-models) for the vistaar training datasets
   - running training
+  ```
+  deepspeed 
+  --include localhost:<gpus to include> training.py \
+  --deepspeed=<path to deepspeed config file> \
+  --model_name_or_path=<model path> \
+  --dataset_name=<dataset language directory path> \
+  --language=<language> \
+  --train_split_name=<train manifest name> \
+  --eval_split_name=<validation manifest name> \
+  --max_steps="5000" \
+  --output_dir=<output directory path> \
+  --cache_dir=<cache directory for downloaded models> \
+  --per_device_train_batch_size="64" \
+  --per_device_eval_batch_size="32" \
+  --gradient_accumulation_steps="1" \
+  --logging_steps="10" \
+  --learning_rate="1e-5" \
+  --warmup_steps="500" \
+  --evaluation_strategy="steps" \
+  --eval_steps="500" \
+  --save_strategy="steps" \
+  --save_steps="500" \
+  --generation_max_length="225" \
+  --length_column_name="input_length" \
+  --max_duration_in_seconds="30" \
+  --text_column_name="sentence" \
+  --freeze_feature_encoder="False" \
+  --report_to="tensorboard" \
+  --metric_for_best_model="wer" \
+  --greater_is_better="False" \
+  --load_best_model_at_end \
+  --gradient_checkpointing \
+  --fp16 \
+  --do_train \
+  --do_eval \
+  --predict_with_generate \
+  --do_normalize_eval="False" \
+  --streaming="True" \
+  --use_auth_token="True" \
+  --push_to_hub="True"
+  ```
   
