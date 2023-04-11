@@ -39,20 +39,15 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
     - [Download Models](#download-models)
   - [Tutorials](#tutorials)
     - [Setting up your environment](#setting-up-your-environment)
-    - [Pretraining](#pretraining)
-      - [Data preparation](#data-preparation)
-      - [Manifest Creation](#manifest-creation)
-    - [Training procedure and code](#training-procedure-and-code)
-    - [Finetuning](#finetuning)
-      - [Data preparation](#data-preparation-1)
-      - [Finetuning procedure and code](#finetuning-procedure-and-code)
-      - [Finetuning procedure and code](#finetuning-procedure-and-code-1)
-    - [Language Modelling (LM)](#language-modelling-lm)
-      - [Data preparation](#data-preparation-2)
-      - [Training details](#training-details)
     - [Evaluating ASR models](#evaluating-asr-models)
-    - [Model exporting](#model-exporting)
-    - [Deployment](#deployment)
+      - [Manifest creation](#manifest-creation)
+      - [Running evaluation](#running-evaluation)
+    - [Inference using IndicWhisper](#inference-using-indicwhisper)
+      - [Sample structure of manifest file](#sample-structure-of-manifest-file)
+      - [Running inference](#running-infernece)
+    - [Training on Vistaar Train Datasets](#training-on-vistaar-train-datasets)
+      - [Manifest creation](#manifest-creation)
+      - [Running training](#running-training)
   - [Cite](#cite)
   - [License](#license)
   - [Contributors](#contributors)
@@ -99,38 +94,38 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   pip install -r requirements.txt
   ```
 ### Evaluating ASR models
-- Manifest Creation
-  - For each dataset Download and extract the benchmark data in a directory. The data should be extracted in such a way that each folder inside should contain data for a particular language i.e each language specific folder should contain train, valid and test folder and within them the audio + transcript.txt 
-  - Sample structure of folder tree:
-  ```
-    kathbath
-        ├── bengali
-        │   ├── audio
-        │   └── transcript.txt
-        │
-        └── gujarti
-            ├── audio
-            └── transcript.txt 
-        .
-        .
-        .
-        .
-  ```
-  - Creating the manifest
-  ```
-  python create_manifest.py \
-  transcribe_youtube_lang.py <audio directory path> \
-  <transcript file path> \
-  <language>
-  ```
+  - Manifest creation
+    - For each dataset Download and extract the benchmark data in a directory. The data should be extracted in such a way that each folder inside should contain data for a particular language i.e each language specific folder should contain train, valid and test folder and within them the audio + transcript.txt 
+    - Sample structure of folder tree:
+    ```
+      kathbath
+          ├── bengali
+          │   ├── audio
+          │   └── transcript.txt
+          │
+          └── gujarti
+              ├── audio
+              └── transcript.txt 
+          .
+          .
+          .
+          .
+    ```
+    - Creating the manifest
+    ```
+    python create_manifest.py \
+    transcribe_youtube_lang.py <audio directory path> \
+    <transcript file path> \
+    <language>
+    ```
   - Running evaluation
-  ```
-  python evaluation.py --model_path=<model path> \
-  --manifest_path=<manifest path in vistaar> \
-  --device=<gpu to use> \
-  --batch_size=<batch size> \
-  --language=<2 letter language code>
-  ```
+    ```
+    python evaluation.py --model_path=<model path> \
+    --manifest_path=<manifest path in vistaar> \
+    --device=<gpu to use> \
+    --batch_size=<batch size> \
+    --language=<2 letter language code>
+    ```
 ### Inference using IndicWhisper
   - Sample structure of manifest file
   ```
@@ -147,13 +142,12 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   <current language> \
   <batch size>
   ```
-### Training on Vistaar train datasets
-  - Manifest Creation
-    - Follow the same steps as in [Evaluating ASR models](#evaluating-asr-models) for the vistaar training datasets
+### Training on Vistaar Train Datasets
+  - Manifest creation
+    - Follow the steps as in [Evaluating ASR models](#evaluating-asr-models) for the vistaar training datasets
   - Running training
   ```
-  deepspeed 
-  --include localhost:<gpus to include> training.py \
+  deepspeed --include localhost:<gpus to include> training.py \
   --deepspeed=<path to deepspeed config file> \
   --model_name_or_path=<model path> \
   --dataset_name=<dataset language directory path> \
