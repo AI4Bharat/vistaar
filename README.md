@@ -35,8 +35,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   - [Benchmarks](#benchmarks)
   - [Table of contents](#table-of-contents)
   - [Resources](#resources)
-    - [Download Training Datasets](#download-training-datasets)
-    - [Download Benchmarks](#download-benchmarks)
+    - [Download Training Datasets and Benchmarks](#download-training-datasets-and-benchmarks)
     - [Download Models](#download-models)
   - [Tutorials](#tutorials)
     - [Setting up your environment](#setting-up-your-environment)
@@ -60,27 +59,16 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   - [Contact](#contact)
 ## Resources
 
-### Download Benchmarks
-|Datasets |Link |
+### Download Training Datasets and Benchmarks
+|Datasets |Training Datasets | Benchamrks |
 | - | - | 
-| Kathbath | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath.zip) |
-| Kathbath Hard | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath_noisy.zip) |
-| CommonVoice | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/commonvoice.zip) |
-| FLEURS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/fleurs.zip) |
-| IndicTTS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/indictts.zip) |
-| MUCS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/mucs.zip) |
-| gramvaani | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/gramvaani.zip) |
-
-### Download Training Datasets
-|Datasets |Link |
-| - | - | 
-| Kathbath | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath.zip) |
-| Kathbath Hard | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath_noisy.zip) |
-| CommonVoice | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/commonvoice.zip) |
-| FLEURS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/fleurs.zip) |
-| IndicTTS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/indictts.zip) |
-| MUCS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/mucs.zip) |
-| gramvaani | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/gramvaani.zip) |
+| Kathbath | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath.zip) | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath.zip) |
+| Kathbath Hard | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath_noisy.zip) | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath_noisy.zip) |
+| CommonVoice | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/commonvoice.zip) | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/commonvoice.zip) |
+| FLEURS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/fleurs.zip) | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/fleurs.zip) |
+| IndicTTS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/indictts.zip) | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/indictts.zip) |
+| MUCS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/mucs.zip) | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/mucs.zip) |
+| gramvaani | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/gramvaani.zip) | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/gramvaani.zip) |
 
 ### Download Models
 |Language |Model Checkpoint |
