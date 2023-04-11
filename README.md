@@ -149,7 +149,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   ```
 ### Training on Vistaar train datasets
   - Manifest Creation
-    -Follow the same steps as in [Evaluating ASR models](#evaluating-asr-models) for the vistaar training datasets
+    - Follow the same steps as in [Evaluating ASR models](#evaluating-asr-models) for the vistaar training datasets
   - Running training
   ```
   deepspeed 
