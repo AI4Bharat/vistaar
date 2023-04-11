@@ -32,9 +32,8 @@ Word error rates (%) of IndicWhisper on the Vistaar Benchmark. Values in bold in
 ## Updates
 
 ## Table of contents
-- [IndicWav2Vec](#indicwav2vec)
+- [Vistaar](#Vistaar:-Diverse-Benchmarks-and-Training-sets-for-Indian-Language-ASR)
   - [Benchmarks](#benchmarks)
-  - [Updates](#updates)
   - [Table of contents](#table-of-contents)
   - [Resources](#resources)
     - [Download Models](#download-models)
