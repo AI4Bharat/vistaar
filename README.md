@@ -67,7 +67,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 ## Resources
 
 ### Download Benchmarks
-|Datasets |Link |
+|Datasets |Link | Langauges
 | - | - | 
 | Kathbath | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath.zip) |
 | Kathbath Hard | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath_noisy.zip) |
@@ -92,3 +92,13 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 | Tamil | [hf](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/tamil_models.zip) |
 | Telugu | [hf](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/telugu_models.zip) |
 | Urdu | [hf](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/urdu_models.zip) |
+
+## Quick start
+### Python Evaluation
+    ```
+     python evaluation_json.py [--model_path=<model path>]
+                               [--manifest_path=<manifest path in vistaar>]
+                               [--device=<device to use (-1 for cpu)>]
+                               [--batch_size=<batch size>]
+                               [--lang_code=<2 letter language code>]
+    ```
