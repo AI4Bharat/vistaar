@@ -41,7 +41,6 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
     - [Download Training Datasets](#download-training-datasets)
     - [Download Benchmarks](#download-benchmarks)
     - [Download Models](#download-models)
-  - [Quick start](#quick-start)
   - [Tutorials](#tutorials)
     - [Setting up your environment](#setting-up-your-environment)
     - [Pretraining](#pretraining)
@@ -102,38 +101,6 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 | Telugu | [hf](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/telugu_models.zip) |
 | Urdu | [hf](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/urdu_models.zip) |
 
-## Quick start
-- Python Evalution
-    ```
-     python evaluation.py [--model_path=<model path>]
-                          [--manifest_path=<manifest path in vistaar>]
-                          [--device=<device to use (-1 for cpu)>]
-                          [--batch_size=<batch size>]
-                          [--lang_code=<language code>]
-    ```
-    
-- Python Transcription
-    ```
-     deepspeed --include localhost:<gpus to include> 
-                 transcribe.py [<current language directory]
-                               [<model path>]
-                               [<language>]
-                               [<batch size>]
-    ```
-    
-- Python Training
-    ```
-     deepspeed --include localhost:<gpus to include> 
-                 training.py [--deepspeed=<deepspeed config path>]
-                             [--model_name_or_path=<model name or path]
-                             [--dataset_name=<dataset path>]
-                             [--language=<language>]
-                             [--train_split_name=<name of train manifest>]
-                             [--eval_split_name=<name of validation manifest>]
-                             [--max_steps=<max number of steps>]
-                             [--output_dir=<output directory>]
-    ```
-
 ## Tutorials
 ### Setting up your environment
 - Setting up python virtual environment
@@ -146,3 +113,52 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   sudo apt install ffmpeg
   pip install -r requirements.txt
   ```
+### Evaluating ASR models
+- Manifest Creation
+  - For each dataset Download and extract the benchmark data in a directory. The data should be extracted in such a way that each folder inside should contain data for a particular language i.e each language specific folder should contain train, valid and test folder and within them the audio + transcript.txt 
+  - Sample structure of folder tree:
+  ```
+    kathbath
+        ├── bengali
+        │   ├── audio
+        │   └── transcript.txt
+        │
+        └── gujarti
+            ├── audio
+            └── transcript.txt 
+        .
+        .
+        .
+        .
+  ```
+  - creating the manifest
+  python create_manifest.py \
+  transcribe_youtube_lang.py <audio directory path> \
+  <transcript file path> \
+  <language>
+  ```
+  - running evaluation
+  ```
+  python evaluation.py --model_path=<model path> \
+  --manifest_path=<manifest path in vistaar> \
+  --device=<gpu to use> \
+  --batch_size=<batch size> \
+  --language=<2 letter language code>
+  ```
+### Inference using IndicWhisper
+  - Sample structure of manifest file
+  ```
+  {"audio_filepath":<path to audio file>}
+  ```
+  - running inference
+  deepspeed --include localhost:<gpus to include> \
+  transcribe_youtube_lang.py <manifest path> \
+  <model path> \
+  <current language> \
+  <batch size>
+  ```
+### Training on Vistaar train datasets
+  - Manifest Creation
+  Follow the same steps as in [Evaluating ASR models](#evaluating-asr-models) for the vistaar training datasets
+  - running training
+  
