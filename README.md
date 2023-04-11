@@ -65,7 +65,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 ## Resources
 
 ### Download Benchmarks
-|Datasets |Link | Langauges
+|Datasets |Link |
 | - | - | 
 | Kathbath | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath.zip) |
 | Kathbath Hard | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath_noisy.zip) |
@@ -76,7 +76,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 | gramvaani | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/gramvaani.zip) |
 
 ### Download Training Datasets
-|Datasets |Link | Langauges
+|Datasets |Link |
 | - | - | 
 | Kathbath | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath.zip) |
 | Kathbath Hard | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath_noisy.zip) |
