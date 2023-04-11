@@ -116,14 +116,14 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
         .
         .
   ```
-  - creating the manifest
+  - Creating the manifest
   ```
   python create_manifest.py \
   transcribe_youtube_lang.py <audio directory path> \
   <transcript file path> \
   <language>
   ```
-  - running evaluation
+  - Running evaluation
   ```
   python evaluation.py --model_path=<model path> \
   --manifest_path=<manifest path in vistaar> \
@@ -139,7 +139,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   .
   .
   ```
-  - running inference
+  - Running inference
   ```
   deepspeed --include localhost:<gpus to include> \
   transcribe_youtube_lang.py <manifest path> \
@@ -150,7 +150,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 ### Training on Vistaar train datasets
   - Manifest Creation
     -Follow the same steps as in [Evaluating ASR models](#evaluating-asr-models) for the vistaar training datasets
-  - running training
+  - Running training
   ```
   deepspeed 
   --include localhost:<gpus to include> training.py \
