@@ -3,7 +3,7 @@
  Vistaar is a set of 59 benchmarks and training datasets across various language and domain combinations such as news, education, literature, tourism etc. The training datasets are avaialable for 12 Indian languages amounting to over 10,700 hours of labelled audio data. We also train IndicWhisper models by fine-tuning the Whisper models on the Vistaar train dataset and observe that it has the lowest WER on 39 out of 59 Vistaar benchmarks.
  
 ## Benchmarks
-Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, CommonVoice, IndicTTS, MUCS, GramVaani across 12 languages. We evaluate IndicWhisper on these benchmarks along with 3 publicly avaialable ASR systems and 2 commercially avaialable systems. Below mentioned are the results
+Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, CommonVoice, IndicTTS, MUCS, GramVaani across 12 languages. We evaluate IndicWhisper on these benchmarks along with 3 publicly available ASR systems and 2 commercially available systems. Below mentioned are the results
 
 | Datasets      | bn       | gu       | hi       | kn       | ml       | mr       | or       | pa       | sa   | ta       | te       | ur       | avg   |
 |---------------|----------|----------|----------|----------|----------|----------|----------|----------|------|----------|----------|----------|-------|
@@ -16,7 +16,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 | Gramvaani     | -        | -        | **26.8** | -        | -        | -        | -        | -        | -    | -        | -        | -        | 26.8  |
 | Average       | 20.1     | 22.8     | 13.6     | 18.3     | 32.3     | 18.2     | 27.4     | 20.5     | 48   | 25.3     | 28.8     | 19.4     | 24.6  |
 
-Word error rates (%) of IndicWhisper on the Vistaar Benchmark. Values in bold indicates benchmarks where IndicWhisper has the lowest WER.
+*Word error rates (%) of IndicWhisper on the Vistaar Benchmark. Values in bold indicates benchmarks where IndicWhisper has the lowest WER.*
 
 | Model         | Kathbath | Kathbath-Hard | FLEURS   | CommonVoice | IndicTTS | MUCS         | Gramvaani | Average   |
 |---------------|----------|---------------|----------|-------------|----------|--------------|-----------|-----------|
@@ -27,7 +27,7 @@ Word error rates (%) of IndicWhisper on the Vistaar Benchmark. Values in bold in
 | Nvidia-large  | 12.7     | 14.2          | 15.7     | 21.2        | 12.2     | **11.8**     | 42.6      | 18.6      |
 | IndicWhisper  | **10.3** | **12.0**      | **11.4** | **15.0**    | **7.6**  | 12           | **26.8**  | **13.6**  |
 
- Comparison of publicly-available models on the Hindi subset of the Vistaar benchmark
+*Comparison of publicly-available models on the Hindi subset of the Vistaar benchmark*
  
 ## Updates
 
