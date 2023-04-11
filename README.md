@@ -94,13 +94,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 | Urdu | [hf](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/urdu_models.zip) |
 
 ## Quick start
-- Greedy Decoding
-    ```
-    python sfi.py [--audio-file AUDIO_FILE_PATH] 
-              [--ft-model FT_MODEL] 
-              [--w2l-decoder viterbi]
-    ```
-### Python Evaluation
+- Python Evalution
     ```
      python evaluation_json.py [--model_path=<model path>]
                                [--manifest_path=<manifest path in vistaar>]
@@ -108,3 +102,4 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
                                [--batch_size=<batch size>]
                                [--lang_code=<2 letter language code>]
     ```
+    
