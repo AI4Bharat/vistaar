@@ -186,4 +186,3 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   --use_auth_token="True" \
   --push_to_hub="True"
   ```
-  
