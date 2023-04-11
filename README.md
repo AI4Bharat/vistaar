@@ -30,9 +30,6 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 
 *Comparison of publicly-available models on the Hindi subset of the Vistaar benchmark*
 
-
-## Updates
-
 ## Table of contents
 - [Vistaar](#vistaar-diverse-benchmarks-and-training-sets-for-indian-language-asr)
   - [Benchmarks](#benchmarks)
@@ -132,6 +129,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
         .
   ```
   - creating the manifest
+  ```
   python create_manifest.py \
   transcribe_youtube_lang.py <audio directory path> \
   <transcript file path> \
@@ -151,6 +149,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   {"audio_filepath":<path to audio file>}
   ```
   - running inference
+  ```
   deepspeed --include localhost:<gpus to include> \
   transcribe_youtube_lang.py <manifest path> \
   <model path> \
