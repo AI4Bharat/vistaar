@@ -68,27 +68,27 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 
 |Language |Acoustic Model |
 | - | - | 
-| Bengali | [hf]() | [link]
+| Bengali | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/bengali_models.zip) |
-| Gujarati | [hf]() | [link]
+| Gujarati | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/gujarati_models.zip) |
-| Hindi | [hf]() | [link]
+| Hindi | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/hindi_models.zip) |
-| Kannada | [hf]() | [link]
+| Kannada | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/kannada_models.zip) |
-| Malayalam | [hf]() | [link]
+| Malayalam | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/malayalam_models.zip) |
-| Marathi | [hf]() | [link]
+| Marathi | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/marathi_models.zip) |
-| Odia | [hf]() | [link]
+| Odia | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/odia_models.zip) |
-| Punjabi | [hf]() | [link]
+| Punjabi | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/punjabi_models.zip) |
-| Sanskrit | [hf]() | [link]
+| Sanskrit | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/sanskrit_models.zip) |
-| Tamil | [hf]() | [link]
+| Tamil | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/tamil_models.zip) |
-| Telugu | [hf]() | [link]
+| Telugu | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/telugu_models.zip) |
-| Urdu | [hf]() | [link]
+| Urdu | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/urdu_models.zip) |
