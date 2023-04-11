@@ -5,6 +5,7 @@
 ## Benchmarks
 Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, CommonVoice, IndicTTS, MUCS, GramVaani across 12 languages. We evaluate IndicWhisper on these benchmarks along with 3 publicly available ASR systems and 2 commercially available systems. Below mentioned are the results
 
+```{table} hello
 | Datasets      | bn       | gu       | hi       | kn       | ml       | mr       | or       | pa       | sa   | ta       | te       | ur       | avg   |
 |---------------|----------|----------|----------|----------|----------|----------|----------|----------|------|----------|----------|----------|-------|
 | Kathbath      | 16.6     | 17.8     | **10.3** | **19.3** | **34.8** | **19.9** | 24.7     | 16.9     | 45.6 | **24.2** | 25       | **11.9** | 22.3  |
@@ -15,7 +16,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 | MUCS          | -        | 33.2     | **12.0** | -        | -        | **12.8** | **27.5** | -        | -    | 28.3     | 32.1     | -        | 24.3  |
 | Gramvaani     | -        | -        | **26.8** | -        | -        | -        | -        | -        | -    | -        | -        | -        | 26.8  |
 | Average       | 20.1     | 22.8     | 13.6     | 18.3     | 32.3     | 18.2     | 27.4     | 20.5     | 48   | 25.3     | 28.8     | 19.4     | 24.6  |
-
+```
 *Word error rates (%) of IndicWhisper on the Vistaar Benchmark. Values in bold indicates benchmarks where IndicWhisper has the lowest WER.*
 
 | Model         | Kathbath | Kathbath-Hard | FLEURS   | CommonVoice | IndicTTS | MUCS         | Gramvaani | Average   |
