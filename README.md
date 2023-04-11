@@ -61,7 +61,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 
 ### Download Training Datasets and Benchmarks
 |Datasets |Training Datasets | Benchamrks |
-| - | - | 
+| - | - | - |
 | Kathbath | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath.zip) | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath.zip) |
 | Kathbath Hard | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath_noisy.zip) | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath_noisy.zip) |
 | CommonVoice | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/commonvoice.zip) | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/commonvoice.zip) |
