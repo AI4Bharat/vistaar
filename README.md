@@ -38,12 +38,10 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   - [Benchmarks](#benchmarks)
   - [Table of contents](#table-of-contents)
   - [Resources](#resources)
+    - [Download Training Datasets](#download-training-datasets)
+    - [Download Benchmarks](#download-benchmarks)
     - [Download Models](#download-models)
-    - [Hosted API Usage](#hosted-api-usage)
-    - [Accessing on ULCA](#accessing-on-ulca)
   - [Quick start](#quick-start)
-    - [Python Inference](#python-inference)
-    - [Huggingface Inference](#huggingface-inference)
   - [Tutorials](#tutorials)
     - [Setting up your environment](#setting-up-your-environment)
     - [Pretraining](#pretraining)
@@ -77,6 +75,17 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 | MUCS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/mucs.zip) |
 | gramvaani | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/gramvaani.zip) |
 
+### Download Training Datasets
+|Datasets |Link | Langauges
+| - | - | 
+| Kathbath | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath.zip) |
+| Kathbath Hard | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/kathbath_noisy.zip) |
+| CommonVoice | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/commonvoice.zip) |
+| FLEURS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/fleurs.zip) |
+| IndicTTS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/indictts.zip) |
+| MUCS | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/mucs.zip) |
+| gramvaani | [link](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/vistaar/gramvaani.zip) |
+
 ### Download Models
 |Language |Model Checkpoint |
 | - | - | 
@@ -96,10 +105,44 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 ## Quick start
 - Python Evalution
     ```
-     python evaluation_json.py [--model_path=<model path>]
-                               [--manifest_path=<manifest path in vistaar>]
-                               [--device=<device to use (-1 for cpu)>]
-                               [--batch_size=<batch size>]
-                               [--lang_code=<2 letter language code>]
+     python evaluation.py [--model_path=<model path>]
+                          [--manifest_path=<manifest path in vistaar>]
+                          [--device=<device to use (-1 for cpu)>]
+                          [--batch_size=<batch size>]
+                          [--lang_code=<language code>]
     ```
     
+- Python Transcription
+    ```
+     deepspeed --include localhost:<gpus to include> 
+                 transcribe.py [<current language directory]
+                               [<model path>]
+                               [<language>]
+                               [<batch size>]
+    ```
+    
+- Python Training
+    ```
+     deepspeed --include localhost:<gpus to include> 
+                 training.py [--deepspeed=<deepspeed config path>]
+                             [--model_name_or_path=<model name or path]
+                             [--dataset_name=<dataset path>]
+                             [--language=<language>]
+                             [--train_split_name=<name of train manifest>]
+                             [--eval_split_name=<name of validation manifest>]
+                             [--max_steps=<max number of steps>]
+                             [--output_dir=<output directory>]
+    ```
+
+## Tutorials
+### Setting up your environment
+- Setting up python virtual environment
+  ```
+  python -m venv <env_name>
+  source <env_name>/bin/activate
+  ```
+- Installing/Updating Libraries
+  ```
+  sudo apt install ffmpeg
+  pip install -r requirements.txt
+  ```
