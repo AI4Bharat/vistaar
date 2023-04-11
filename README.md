@@ -15,6 +15,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 | MUCS          | -        | 33.2     | **12.0** | -        | -        | **12.8** | **27.5** | -        | -    | 28.3     | 32.1     | -        | 24.3  |
 | Gramvaani     | -        | -        | **26.8** | -        | -        | -        | -        | -        | -    | -        | -        | -        | 26.8  |
 | Average       | 20.1     | 22.8     | 13.6     | 18.3     | 32.3     | 18.2     | 27.4     | 20.5     | 48   | 25.3     | 28.8     | 19.4     | 24.6  |
+
 *Word error rates (%) of IndicWhisper on the Vistaar Benchmark. Values in bold indicates benchmarks where IndicWhisper has the lowest WER.*
 
 
@@ -26,6 +27,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 | Nvidia-medium | 14       | 15.6          | 19.4     | 20.4        | 12.3     | 12.4         | 41.3      | 19.4      |
 | Nvidia-large  | 12.7     | 14.2          | 15.7     | 21.2        | 12.2     | **11.8**     | 42.6      | 18.6      |
 | IndicWhisper  | **10.3** | **12.0**      | **11.4** | **15.0**    | **7.6**  | 12           | **26.8**  | **13.6**  |
+
 *Comparison of publicly-available models on the Hindi subset of the Vistaar benchmark*
 
 
