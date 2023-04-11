@@ -70,8 +70,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 | - | - | 
 | Bengali | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/bengali_models.zip) |
-| Gujarati | [hf]()
-(https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/gujarati_models.zip) |
+| Gujarati | [hf](https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/gujarati_models.zip) |
 | Hindi | [hf]()
 (https://objectstore.e2enetworks.net/indic-asr-public/indicwhisper/all_lang_models/hindi_models.zip) |
 | Kannada | [hf]()
