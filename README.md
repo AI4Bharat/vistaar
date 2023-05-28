@@ -139,7 +139,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   - Running inference
   ```
   deepspeed --include localhost:<gpus to include> \
-  transcribe_youtube_lang.py <manifest path> \
+  transcribe.py <manifest path> \
   <model path> \
   <current language> \
   <batch size>
