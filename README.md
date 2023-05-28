@@ -112,12 +112,10 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
           .
     ```
     - Creating the manifest
-    ```
-    python create_manifest.py \
-    transcribe_youtube_lang.py <audio directory path> \
-    <transcript file path> \
-    <language>
-    ```
+     - Each manifest needs to be a Json file where each line is a dictionary with audio filepath, duration of audio and text transcript
+     ```
+      {"audio_filepath": "/data/sample_audio.wav", "duration": 5, "text": "sample text"}
+     ```
   - Running evaluation
     ```
     python evaluation.py --model_path=<model path> \
