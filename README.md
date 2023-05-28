@@ -113,8 +113,8 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
     ```
     - The manifest needs to be a Json file where each line is a dictionary with audio filepath, duration of audio and text transcript
     ```
-     {"audio_filepath": "/data/sample_audio_1.wav", "duration": 5, "text": "sample text 1"}
-     {"audio_filepath": "/data/sample_audio_2.wav", "duration": 6, "text": "sample text 2"}
+     {"audio_filepath": <path to audio file 1>, "duration": <duration of audio file 1>, "text": <transcript of audio file 1>}
+     {"audio_filepath": <path to audio file 2>, "duration": <duration of audio file 2>, "text": <transcript of audio file 2>}
      .
      .
      .
@@ -132,6 +132,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   ```
   {"audio_filepath":<path to audio file 1>}
   {"audio_filepath":<path to audio file 2>}
+  .
   .
   .
   ```
