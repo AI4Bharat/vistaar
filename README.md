@@ -111,11 +111,14 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
           .
           .
     ```
-    - Creating the manifest
-     - Each manifest needs to be a Json file where each line is a dictionary with audio filepath, duration of audio and text transcript
-     ```
-      {"audio_filepath": "/data/sample_audio.wav", "duration": 5, "text": "sample text"}
-     ```
+    - The manifest needs to be a Json file where each line is a dictionary with audio filepath, duration of audio and text transcript
+    ```
+     {"audio_filepath": "/data/sample_audio_1.wav", "duration": 5, "text": "sample text 1"}
+     {"audio_filepath": "/data/sample_audio_2.wav", "duration": 6, "text": "sample text 2"}
+     .
+     .
+     .
+    ```
   - Running evaluation
     ```
     python evaluation.py --model_path=<model path> \
