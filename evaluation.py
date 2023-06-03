@@ -1,5 +1,4 @@
 import argparse
-
 from transformers import pipeline
 from datasets import load_dataset, Audio
 import evaluate
@@ -8,7 +7,6 @@ from tqdm import tqdm
 import json
 import librosa
 import pandas as pd
-#from datasets import Dataset
 from torch.utils.data import Dataset
 from indicnlp.normalize.indic_normalize import IndicNormalizerFactory
 import pyarrow as pa
@@ -32,6 +30,21 @@ from transformers import (
     TrainerCallback,
     set_seed,
 )
+
+lang_to_code = {
+    'hindi': 'hi',
+    'sanskrit': 'sa',
+    'bengali': 'bn',
+    'tamil': 'ta',
+    'telugu': 'te',
+    'gujarati': 'gu',
+    'kannada': 'kn',
+    'malayalam': 'ml',
+    'marathi': 'mr',
+    'odia': 'or',
+    'punjabi': 'pa',
+    'urdu': 'ur',
+}
 
 def normalize_sentence(sentence, lang_code):
     '''
@@ -64,27 +77,35 @@ class eval_dataset(Dataset):
 def get_data(split):
     js_data = json.loads(split)
     aud = {}
-    aud['path'] = js_data['audio_filepath'].replace('/nlsasfs/home/ai4bharat/', '/workspace/')
+    aud['path'] = js_data['audio_filepath'].replace('/nlsasfs/home/ai4bharat/ai4bharat-pr/speechteam/asr_datasets', '/workspace/ai4bharat-pr/speechteam/ai4bp_upload/vistaar')
     y, sr = sf.read(aud['path'])
     aud['duration'] = js_data['duration']
     aud['array'] = y
     aud['sampling_rate'] = sr
     
     return (aud, js_data['text'])
-    #return (aud['path'], js_data['text'])
     
 
 def main(args):
     
-    MANIFEST_BASE_FOLDER = '/workspace/ai4bharat-pr/speechteam/asr_datasets'
-    MODEL_BASE_FOLDER = '/workspace/ai4bharat-pr/speechteam/whisper_sai'
-    batch_size = args.batch_size
+    with open(args.manifest_path, 'r') as f:
+        data = f.read()
+        splits = data.split('\n')
+        if splits[-1] == '':
+            splits = splits[:-1]
+    
+    da = Parallel(n_jobs=128)(delayed(get_data)(split) for split in tqdm(splits))
+    
+    dataset = eval_dataset()
+    for d in da:
+        dataset.fill_data(d[0], d[1])
+ 
     whisper_asr = pipeline(
-        "automatic-speech-recognition", model=os.path.join(MODEL_BASE_FOLDER, args.model_id), device=args.device,
+        "automatic-speech-recognition", model=args.model_path, device=args.device,
     )
     
     # Special case to handle odia since odia is not supported by whisper model
-    if args.language == 'or':
+    if args.lang_code == 'or':
         whisper_asr.model.config.forced_decoder_ids = (
             whisper_asr.tokenizer.get_decoder_prompt_ids(
                 language=None, task="transcribe"
@@ -93,44 +114,35 @@ def main(args):
     else:
         whisper_asr.model.config.forced_decoder_ids = (
             whisper_asr.tokenizer.get_decoder_prompt_ids(
-                language=args.language, task="transcribe"
+                language=args.lang_code, task="transcribe"
             )
         )
-    
-    with open(os.path.join(MANIFEST_BASE_FOLDER, args.dataset + '.json'), 'r') as f:
-        data = f.read()
-        splits = data.split('\n')[:-1]
-    
-    da = Parallel(n_jobs=128)(delayed(get_data)(split) for split in tqdm(splits))
-    # data_dict = {}
-    # data_dict['audio'] = []
-    # data_dict['sentence'] = []
-    
-    dataset = eval_dataset()
-    for d in da:
-        dataset.fill_data(d[0], d[1])
 
     hypothesis = []
     ground_truth = []
     
+    os.makedirs(dir_path + '/' + 'predictions', exist_ok=True)
     
-    open(MODEL_BASE_FOLDER + '/evaluation_scripts/predictions/' + args.model_id.replace('/','_')
-         + '_' + args.dataset.replace('/','_') + '_predictions.json', 'w').close()
+    out_name = args.model_path.rsplit('/',1)[-1] + '_' + args.manifest_name + '_' + 'predictions.json'
+    
+    open(dir_path + '/' + 'predictions/' + out_name, 'w').close()
     
     st = time.time()
     
-    for out in tqdm(whisper_asr(dataset, batch_size=batch_size), total=len(dataset)):
+    for out in tqdm(whisper_asr(dataset, batch_size=args.batch_size), total=len(dataset)):
         
         hyp = out['text']
         ref = out['reference'][0]
         hyp = hyp.translate(str.maketrans('', '', string.punctuation+"।۔'-॥"))
         ref = ref.translate(str.maketrans('', '', string.punctuation+"।۔'-॥"))
-        if args.language[:2] != 'ur':
-            hyp = normalize_sentence(hyp, args.language[:2])
-            ref = normalize_sentence(ref, args.language[:2])
+        if args.lang_code[:2] != 'ur':
+            hyp = normalize_sentence(hyp, args.lang_code[:2])
+            ref = normalize_sentence(ref, args.lang_code[:2])
         hyp = re.sub(' +', ' ', hyp)
         ref = re.sub(' +', ' ', ref)
         
+        if ref == '':
+            ref = '<empty>'
         hypothesis.append(hyp)
         ground_truth.append(ref)
         res = {
@@ -139,56 +151,51 @@ def main(args):
             "text":ref,
             "pred_text":hyp
         }
-        with open(MODEL_BASE_FOLDER + '/evaluation_scripts/predictions/' + args.model_id.replace('/','_')
-         + '_' + args.dataset.replace('/','_') + '_predictions.json', 'a') as f:
+        with open(dir_path + '/' + 'predictions/' + out_name, 'a') as f:
             json.dump(res, f)
             f.write('\n')
     
     et = time.time()
      
     data = {}
-    data['model'] = args.model_id
-    data['dataset'] = args.dataset
-    data['language'] = args.language
+    data['model'] = args.model_path
+    data['dataset'] = args.manifest_name
+    data['language'] = args.lang_code
     data['cer'] = jiwer.cer(ground_truth, hypothesis)
     data['time'] = (et-st)/60
     data['batch_size'] = args.batch_size
     measures = jiwer.compute_measures(ground_truth, hypothesis)
-    data.update(measures)
+    data['wer'] = measures['wer']
+
     print(data)
     
-    with open('results.csv', 'a') as results_fp:
+    with open(dir_path + '/' + 'results.csv', 'a') as results_fp:
         print(','.join([str(v) for v in data.values()]), file=results_fp)
 
 
 if __name__ == "__main__":
+    
+    dir_path = os.path.dirname(os.path.realpath(__file__))
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
-        "--model_id",
+        "--model_path",
         type=str,
         required=True,
-        help="Model identifier. Should be loadable with 🤗 Transformers",
+        help="path to model",
     )
     parser.add_argument(
-        "--dataset",
-        type=str,
-        default="mozilla-foundation/common_voice_11_0",
-        help="Dataset name to evaluate the `model_id`. Should be loadable with 🤗 Datasets",
-    )
-    parser.add_argument(
-        "--config",
+        "--manifest_path",
         type=str,
         required=True,
-        help="Config of the dataset. *E.g.* `'en'` for the English split of Common Voice",
+        help="path to vistaar manifest",
     )
     parser.add_argument(
-        "--split",
+        "--manifest_name",
         type=str,
-        default="test",
-        help="Split of the dataset. *E.g.* `'test'`",
+        required=True,
+        help="manifest name",
     )
-
     parser.add_argument(
         "--device",
         type=int,
@@ -198,27 +205,20 @@ if __name__ == "__main__":
     parser.add_argument(
         "--batch_size",
         type=int,
-        default=16,
-        help="Number of samples to go through each streamed batch.",
-    )
-    parser.add_argument(
-        "--max_eval_samples",
-        type=int,
-        default=None,
-        help="Number of samples to be evaluated. Put a lower number e.g. 64 for testing this script.",
-    )
-    parser.add_argument(
-        "--streaming",
-        type=bool,
-        default=True,
-        help="Choose whether you'd like to download the entire dataset or stream it during the evaluation.",
+        default=32,
+        help="Number of samples for each batch.",
     )
     parser.add_argument(
         "--language",
         type=str,
         required=True,
-        help="Two letter language code for the transcription language, e.g. use 'en' for English.",
+        help="current language",
     )
     args = parser.parse_args()
+    
+    if len(args.language) == 2:
+        args.lang_code = args.language.lower()
+    else:
+        args.lang_code = lang_to_code[args.language.lower()]
 
     main(args)
