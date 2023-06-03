@@ -110,25 +110,6 @@ def compute_transition_scores(
 
     return transition_scores
 
-
-def fill_manifest(filename, manifest_path, root_dir):
-    if filename.endswith('.wav'):
-        aud_path = root_dir + '/chunks/' + filename
-        with open(manifest_path, 'a') as f:
-            metadata = {
-                "audio_filepath":aud_path,
-            }
-            json.dump(metadata, f)
-            f.write('\n')
-    
-def generate_manifest(root_dir):
-    filenames = os.listdir(root_dir + '/chunks')
-    manifest_path = root_dir + '/transcriptions/manifest.json'
-    
-    open(manifest_path, 'w').close()
-    
-    Parallel(n_jobs=128)(delayed(fill_manifest)(filename, manifest_path, root_dir) for filename in tqdm(filenames))
-
 def map_to_pred(batch):
     
     arrays = []
@@ -142,7 +123,6 @@ def map_to_pred(batch):
 
     batch_size = predicted_ids.scores[0].shape[0]
     
-    #batch['scores_2'] = torch.hstack(tuple(torch.amax(predicted_ids.scores[i], dim = 1, keepdim = True, out=None) for i in range(len(predicted_ids.scores))))
     batch['scores'] = compute_transition_scores(model.config.vocab_size, predicted_ids.sequences, predicted_ids.scores, normalize_logits = True)
     batch['scores'] = batch['scores'].tolist()
 
@@ -150,8 +130,7 @@ def map_to_pred(batch):
 
     batch["pred_text"] = transcription
 
-    with open(MANIFEST_BASE_FOLDER + '/predictions/' + model_id.replace('/','_')
-         + '_predictions' + '_'  + str(sn) + '-' + str(en) +  '.json', 'a') as f:
+    with open(output_path, 'a') as f:
         for i in range(batch_size):
             resp = {
                 'audio_filepath' : batch['audio_filepath'][i],
@@ -171,22 +150,19 @@ def get_duration(batch):
     
     return batch
     
-root_dir=sys.argv[2]        
-model_id=sys.argv[3]
+manifest_path = sys.argv[2]        
+model_id = sys.argv[3]
 
-language=sys.argv[4] 
+language = sys.argv[4] 
 language = language.capitalize()
 lang_code = lang_codes[language] 
 
-sn = int(sys.argv[5])
-en = int(sys.argv[6])
-batch_size=int(sys.argv[7])
+batch_size = int(sys.argv[5])
+output_path = sys.argv[6] 
     
-local_rank = 0
-world_size = 1
-
-print("sn", sn)
-print("en", en)
+# Get local gpu rank from torch.distributed/deepspeed launcher
+local_rank = int(os.getenv('LOCAL_RANK', '0'))
+world_size = int(os.getenv('WORLD_SIZE', '1'))
 
 print(
 "***************** Creating model in RANK ({0}) with WORLD_SIZE = {1} *****************"
@@ -212,28 +188,7 @@ model = deepspeed.init_inference(model,
                                 replace_with_kernel_inject=False)
 model.to(f'cuda:{local_rank}')
 
-MANIFEST_BASE_FOLDER = root_dir + '/transcriptions'
-
-os.makedirs(MANIFEST_BASE_FOLDER, exist_ok=True)
-
-if not os.path.exists(MANIFEST_BASE_FOLDER + '/manifest.json'):
-    generate_manifest(root_dir)
-        
-with open(MANIFEST_BASE_FOLDER + '/manifest.json', 'r') as f:
-    data = f.read()
-    splits = data.split('\n')
-    if splits[-1] == '':
-        splits = splits[:-1]
-
-left_splits = splits[sn: en]
-    
-with open(MANIFEST_BASE_FOLDER + '/part_manifest_' + str(sn) + '-' + str(en) + '.json', 'w') as f:
-    for line in left_splits:
-        f.write(line + '\n')
-
-dataset = load_dataset('json', data_files = MANIFEST_BASE_FOLDER + '/part_manifest_' + str(sn) + '-' + str(en) + '.json')['train']
-
-print("part manifest created")
+dataset = load_dataset('json', data_files = manifest_path)['train']
 
 dataset = dataset.rename_column('audio_filepath', 'audio')
 filepaths = dataset['audio']
@@ -244,14 +199,10 @@ dataset = dataset.cast_column("audio", Audio())
 dataset = dataset.map(get_duration, num_proc = 32)
 dataset = dataset.filter(lambda sample: [samp>0 for samp in sample['duration']], batched = True, batch_size = 1000)
 
-os.makedirs(MANIFEST_BASE_FOLDER + '/predictions', exist_ok = True)
-open(MANIFEST_BASE_FOLDER + '/predictions/' + model_id.replace('/','_')
-        + '_predictions' + '_'  + str(sn) + '-' + str(en) + '.json', 'w').close()
+open(output_path, 'w').close()
 
 st = time.time()
 dataset.map(map_to_pred, batched=True, batch_size=batch_size, remove_columns=["audio"])
 et = time.time()
 
 print("time taken",(et-st)*1.0/3600)
-print("sn", sn)
-print("en", en)
