@@ -144,6 +144,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   <model path> \
   <current language> \
   <batch size>
+  <output path>
   ```
 ### Training on Vistaar Train Datasets
   - Manifest creation
