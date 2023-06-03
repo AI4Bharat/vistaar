@@ -123,6 +123,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
     ```
     python evaluation.py --model_path=<model path> \
     --manifest_path=<manifest path in vistaar> \
+    --manifest_name=<dataset name in vistaar> \
     --device=<gpu to use> \
     --batch_size=<batch size> \
     --language=<2 letter language code>
