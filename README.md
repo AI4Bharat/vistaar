@@ -190,3 +190,22 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   --use_auth_token="True" \
   --push_to_hub="True"
   ```
+
+## License
+
+IndicWav2Vec is [MIT](https://choosealicense.com/licenses/mit/)-licensed. The license applies to all the fine-tuned language models
+
+## Contributors
+- Kaushal Bhogale, (AI4Bharat)
+- Sai Narayan Sundaresan, (IITKGP, AI4Bharat)
+- Abhigyan Raman, (AI4Bharat)
+- Tahir Javed, (IITM, AI4Bharat)
+- Mitesh Khapra, (IITM, AI4Bharat, RBCDSAI)
+- Pratyush Kumar, (Microsoft, AI4Bharat)
+
+## Contact
+- Mitesh Khapra ([miteshk@cse.iitm.ac.in](mailto:miteshk@cse.iitm.ac.in))
+- Pratyush Kumar ([pratyush@cse.iitm.ac.in](mailto:pratyush@cse.iitm.ac.in))
+
+## Acknowledgements
+We would like to thank EkStep Foundation for their generous grant which helped in setting up the Centre for AI4Bharat at IIT Madras to support our students, research staff, data and computational requirements. We would like to thank The Ministry of Electronics and Information Technology (NLTM) for its grant to support the creation of datasets and models for Indian languages under its ambitions Bhashini project. We would also like to thank the Centre for Development of Advanced Computing, India (C-DAC) for providing access to the Param Siddhi supercomputer for training our models. Lastly, we would like to thank Microsoft for its grant to create datasets, tools and resources for Indian languages.
