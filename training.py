@@ -1,10 +1,3 @@
-"""
-Fine-tuning the library models for sequence to sequence speech recognition
-with 🤗 Datasets' streaming mode.
-"""
-# You can also adapt this script for your own sequence to sequence speech
-# recognition task. Pointers for this are left as comments.
-
 import logging
 import os
 import sys
@@ -33,7 +26,6 @@ from transformers import (
     TrainerCallback,
     set_seed,
 )
-#from transformers.models.whisper.english_normalizer import BasicTextNormalizer
 from transformers.trainer_pt_utils import IterableDatasetShard
 from transformers.trainer_utils import get_last_checkpoint, is_main_process
 from transformers.utils import check_min_version, send_example_telemetry
@@ -45,11 +37,6 @@ import librosa
 import soundfile as sf
 import datasets
 from pathlib import Path
-
-# import multiprocess
-
-# multiprocess.set_start_method("spawn")
-
 
 # Will error if the minimal version of Transformers is not installed. Remove at your own risks.
 check_min_version("4.25.0.dev0")
@@ -295,12 +282,6 @@ def load_maybe_streaming_dataset(dataset_name, dataset_config_name, split="train
 
 
 def main():
-    # 1. Parse input arguments
-    # See all possible arguments in src/transformers/training_args.py
-    # or by passing the --help flag to this script.
-    # We now keep distinct sets of args, for a cleaner separation of concerns.
-    
-    errors = 0
     
     parser = HfArgumentParser((ModelArguments, DataTrainingArguments, Seq2SeqTrainingArguments))
 
@@ -387,10 +368,7 @@ def main():
             use_auth_token=True if model_args.use_auth_token else None,
             streaming=data_args.streaming,
         )
-    #raw_datasets = load_from_disk(data_args.dataset_name + '/raw_dataset')
-
-    # 5. Load pretrained model, tokenizer, and feature extractor
-    #
+        
     # Distributed training:
     # The .from_pretrained methods guarantee that only one local process can concurrently
     config = AutoConfig.from_pretrained(
@@ -456,24 +434,8 @@ def main():
     model_input_name = feature_extractor.model_input_names[0]
     do_lower_case = data_args.do_lower_case
     do_remove_punctuation = data_args.do_remove_punctuation
-    #normalizer = BasicTextNormalizer()  # 'official' text normalizer from OpenAI
-
-    # if data_args.max_train_samples is not None:
-    #     raw_datasets["train"] = (
-    #         raw_datasets["train"].take(data_args.max_train_samples)
-    #         if data_args.streaming
-    #         else raw_datasets["train"].select(range(data_args.max_train_samples))
-    #     )
-
-    # if data_args.max_eval_samples is not None:
-    #     raw_datasets["eval"] = (
-    #         raw_datasets["eval"].take(data_args.max_eval_samples)
-    #         if data_args.streaming
-    #         else raw_datasets["eval"].select(range(data_args.max_eval_samples))
-    #     )  
     
     with training_args.main_process_first(desc="dataset map pre-processing"):
-
         vectorized_datasets = raw_datasets
 
     # 8. Load Metric
@@ -517,8 +479,6 @@ def main():
                 pass  # set_epoch() is handled by the Trainer
             elif isinstance(train_dataloader.dataset, IterableDataset):
                 train_dataloader.dataset.set_epoch(train_dataloader.dataset._epoch + 1)
-    
-    print(vectorized_datasets)
 
     #Initialize Trainer
     trainer = Seq2SeqTrainer(
@@ -582,11 +542,6 @@ def main():
         if model_args.model_index_name is not None:
             kwargs["model_name"] = model_args.model_index_name
 
-    # if training_args.push_to_hub:
-    #     trainer.push_to_hub(**kwargs)
-    # else:
-    #     trainer.create_model_card(**kwargs)
-    print(errors)
     return results
 
 
