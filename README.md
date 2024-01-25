@@ -193,7 +193,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
 
 ## License
 
-IndicWav2Vec is [MIT](https://choosealicense.com/licenses/mit/)-licensed. The license applies to all the fine-tuned language models
+Vistaar is [MIT](https://choosealicense.com/licenses/mit/)-licensed. The license applies to all the fine-tuned language models
 
 ## Contributors
 - Kaushal Bhogale, (AI4Bharat)
