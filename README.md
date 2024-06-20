@@ -137,7 +137,7 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   .
   .
   ```
-  - Running inference
+  - Running batch inference
   ```
   deepspeed --include localhost:<gpus to include> \
   transcribe.py <manifest path> \
@@ -145,6 +145,35 @@ Vistaar consists of benchmarks from several public datasets - Kathbath, FLEURS, 
   <current language> \
   <batch size>
   <output path>
+  ```
+  - Running inference for a single audio file
+  ```python
+  from transformers import pipeline
+
+  model_path = "hindi_models/whisper-medium-hi_alldata_multigpu"
+  device = "cuda"
+  lang_code = "hi"
+  
+  whisper_asr = pipeline(
+      "automatic-speech-recognition", model=model_path, device=device,
+  )
+  
+  # Special case to handle odia since odia is not supported by whisper model
+  if lang_code == 'or':
+      whisper_asr.model.config.forced_decoder_ids = (
+          whisper_asr.tokenizer.get_decoder_prompt_ids(
+              language=None, task="transcribe"
+          )
+      )
+  else:
+      whisper_asr.model.config.forced_decoder_ids = (
+          whisper_asr.tokenizer.get_decoder_prompt_ids(
+              language=lang_code, task="transcribe"
+          )
+      )
+  
+  result = whisper_asr("audio.mp3")
+  print(result["text"])
   ```
 ### Training on Vistaar Train Datasets
   - Manifest creation
