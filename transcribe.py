@@ -183,7 +183,7 @@ processor = AutoProcessor.from_pretrained(
 
 model = deepspeed.init_inference(model,
                                 mp_size=world_size,
-                                dtype=torch.float16,
+                                dtype=torch.float32,
                                 #injection_policy={Wav2Vec2EncoderLayer: ('attention.out_proj','feed_forward.output_dense')},
                                 replace_with_kernel_inject=False)
 model.to(f'cuda:{local_rank}')
