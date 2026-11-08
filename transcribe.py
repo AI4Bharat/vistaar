@@ -194,7 +194,7 @@ dataset = dataset.rename_column('audio_filepath', 'audio')
 filepaths = dataset['audio']
 
 dataset = dataset.add_column(name="audio_filepath", column=filepaths)
-dataset = dataset.cast_column("audio", Audio())
+dataset = dataset.cast_column("audio", Audio(sampling_rate=16_000))
 
 dataset = dataset.map(get_duration, num_proc = 32)
 dataset = dataset.filter(lambda sample: [samp>0 for samp in sample['duration']], batched = True, batch_size = 1000)
